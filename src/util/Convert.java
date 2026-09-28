@@ -36,8 +36,8 @@ public class Convert {
         String role_name = result.getString("role_name");
         Role role = new Role(role_id,role_name);
         String phone = result.getString("phone");
-
-        return new User(userId,userFullname,email,password,role,phone,passwordHash,salt);
+        BigDecimal solde = result.getBigDecimal("solde");
+        return new User(userId,userFullname,email,password,role,phone,passwordHash,salt,solde);
 
 
 
@@ -55,7 +55,29 @@ public class Convert {
        ReservationStatus status = ReservationStatus.valueOf(
                 result.getString("reservation_status")
         );
+       BigDecimal total_price = result.getBigDecimal("total_price");
 
-       return new Reservation(reservationCode,userId,roomNumber,checkIn,checkOut,guestNumber,nightNumber,status,createdAt);
+       return new Reservation(reservationCode,userId,roomNumber,checkIn,checkOut,guestNumber,nightNumber,status,createdAt,total_price);
     }
+
+
+    public static Payment mapToPayment(ResultSet resultSet) throws SQLException {
+
+        UUID id = resultSet.getObject("id", UUID.class);
+        String reservationCode = resultSet.getString("reservation_code");
+        BigDecimal amountHt = resultSet.getBigDecimal("amount_ht");
+        PaymentStatus status = PaymentStatus.valueOf(resultSet.getString("status"));
+        BigDecimal tva = resultSet.getBigDecimal("tva");
+        BigDecimal amountTtc = resultSet.getBigDecimal("amount_ttc");
+        PaymentMethode paymentMethode =
+                PaymentMethode.valueOf(
+                        resultSet.getString("payment_methode")
+                );
+
+        LocalDate paymentDate = resultSet.getObject("payment_date", LocalDate.class);
+        return new Payment(id, null,amountHt,status,tva,amountTtc,paymentMethode,paymentDate);
+    }
+
+
 }
+

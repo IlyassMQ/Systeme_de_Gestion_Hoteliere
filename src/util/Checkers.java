@@ -36,6 +36,14 @@ public class Checkers {
         return user.get();
     }
 
+    public Client clientCheckById(UUID userId) throws SQLException, UserNoteFoundException {
+        Optional<Client> client = clientRepository.findClientById(userId);
+        if (client.isEmpty()){
+            throw new UserNoteFoundException();
+        }
+        return client.get();
+    }
+
 
 
 
@@ -65,6 +73,8 @@ public class Checkers {
                 }
                 return true;
     }
+
+
 
 
 }

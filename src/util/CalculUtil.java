@@ -14,5 +14,10 @@ public class CalculUtil {
     }
 
 
+    public static BigDecimal TvaCalcul(BigDecimal amountHT){
+        BigDecimal TVA = new BigDecimal("0.20");
+        return amountHT.multiply(TVA);
+    }
+
 
 }
