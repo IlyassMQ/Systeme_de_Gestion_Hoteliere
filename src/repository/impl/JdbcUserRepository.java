@@ -1,14 +1,12 @@
 package repository.impl;
 
 import config.DatabaseConnection;
+import model.Client;
 import model.User;
 import repository.UserRepository;
 import util.Convert;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 
 public class JdbcUserRepository implements UserRepository {
@@ -19,7 +17,7 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public void save(User user) throws SQLException {
 
-            String query = "insert into users (id,full_name,email,password,password_hash,role_id,phone,salt) VALUES (?,?,?,?,?,?,?,?)";
+            String query = "insert into users (id,full_name,email,password,password_hash,role_id,phone,salt,solde) VALUES (?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement statement = cnx.prepareStatement(query);
             statement.setObject(1,user.getId());
@@ -30,6 +28,11 @@ public class JdbcUserRepository implements UserRepository {
             statement.setInt(6,user.getRole().getId());
             statement.setString(7,user.getPhone());
             statement.setString(8, user.getSalt());
+            if (user instanceof Client client) {
+                    statement.setBigDecimal(9, client.getSolde());
+                } else {
+                    statement.setNull(9, Types.NUMERIC);
+                }
 
             statement.executeUpdate();
         }
@@ -112,4 +115,40 @@ public class JdbcUserRepository implements UserRepository {
         }
         return Optional.empty();
     }
+
+    @Override
+    public void updateSolde(Client client) throws SQLException {
+
+        String sql = "UPDATE users SET solde = ? WHERE id = ?";
+
+        PreparedStatement statement = cnx.prepareStatement(sql);
+            statement.setBigDecimal(1, client.getSolde());
+            statement.setObject(2, client.getId());
+            statement.executeUpdate();
+
+    }
+
+
+
+    @Override
+    public Optional<Client> findClientById(UUID userId) throws SQLException {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean existsUsers() throws SQLException {
+
+        String sql = "SELECT 1 FROM users";
+
+            PreparedStatement statement = cnx.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return true;
+            }
+
+
+        return false;
+    }
+
 }
