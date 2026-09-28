@@ -5,9 +5,9 @@ import java.util.UUID;
 public class Invoices {
     private UUID id;
     private String invoice_number;
-    private Payments payments;
+    private Payment payments;
 
-    public Invoices(UUID id, String invoice_number, Payments payments) {
+    public Invoices(UUID id, String invoice_number, Payment payments) {
         this.id = id;
         this.invoice_number = invoice_number;
         this.payments = payments;
@@ -29,11 +29,11 @@ public class Invoices {
         this.invoice_number = invoice_number;
     }
 
-    public Payments getPayments() {
+    public Payment getPayments() {
         return payments;
     }
 
-    public void setPayments(Payments payments) {
+    public void setPayments(Payment payments) {
         this.payments = payments;
     }
 }

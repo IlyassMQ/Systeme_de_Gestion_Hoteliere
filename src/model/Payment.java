@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Payments {
+public class Payment {
     private UUID id;
     private Reservation reservation_code;
     private BigDecimal amount_ht;
@@ -14,7 +14,7 @@ public class Payments {
     private PaymentMethode paymentMethode;
     private LocalDate payment_date;
 
-    public Payments(UUID id, Reservation reservation_code, BigDecimal amount_ht, PaymentStatus status, BigDecimal tva, BigDecimal amount_ttc, PaymentMethode paymentMethode, LocalDate payment_date) {
+    public Payment(UUID id, Reservation reservation_code, BigDecimal amount_ht, PaymentStatus status, BigDecimal tva, BigDecimal amount_ttc, PaymentMethode paymentMethode, LocalDate payment_date) {
         this.id = id;
         this.reservation_code = reservation_code;
         this.amount_ht = amount_ht;
@@ -24,7 +24,9 @@ public class Payments {
         this.paymentMethode = paymentMethode;
         this.payment_date = payment_date;
     }
-
+    public UUID getId(){
+        return id;
+    }
     public Reservation getReservation_code() {
         return reservation_code;
     }
@@ -77,7 +79,7 @@ public class Payments {
         return payment_date;
     }
 
-    public void setPayment_date(LocalDate payment_date) {
+    public void setPayment_date() {
         this.payment_date = payment_date;
     }
 }

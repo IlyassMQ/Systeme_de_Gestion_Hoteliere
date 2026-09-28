@@ -16,9 +16,9 @@ public class Reservation {
     private int numberOfNights;
     private ReservationStatus status;
     private LocalDateTime createdAt;
+    private BigDecimal total_price;
 
-
-    public Reservation(String reservationCode, UUID userId, String roomNumber, LocalDate checkIn, LocalDate checkOut, int numberOfGuests, int numberOfNights, ReservationStatus status, LocalDateTime createdAt) {
+    public Reservation(String reservationCode, UUID userId, String roomNumber, LocalDate checkIn, LocalDate checkOut, int numberOfGuests, int numberOfNights, ReservationStatus status, LocalDateTime createdAt, BigDecimal total_price) {
         this.reservationCode = reservationCode;
         this.userId = userId;
         this.roomNumber = roomNumber;
@@ -28,6 +28,8 @@ public class Reservation {
         this.numberOfNights = numberOfNights;
         this.status = status;
         this.createdAt = createdAt;
+        this.total_price = total_price;
+
     }
 
 
@@ -101,5 +103,13 @@ public class Reservation {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public BigDecimal getTotal_price() {
+        return total_price;
+    }
+
+    public void setTotal_price(BigDecimal total_price) {
+        this.total_price = total_price;
     }
 }

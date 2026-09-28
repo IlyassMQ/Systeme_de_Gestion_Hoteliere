@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public class User {
@@ -12,11 +13,13 @@ public class User {
     private String salt;
     private Role role;
     private String phone;
+    private BigDecimal solde;
 
 
 
 
-    public User(UUID id, String fullName, String email, String password ,Role role,String phone,String hashedPassword,String salt){
+
+    public User(UUID id, String fullName, String email, String password ,Role role,String phone,String hashedPassword,String salt,BigDecimal solde){
         this.id = id;
         this.fullName = fullName;
         this.email = email;
@@ -25,6 +28,7 @@ public class User {
         this.hashedPassword = hashedPassword;
         this.salt = salt;
         this.phone = phone;
+        this.solde = solde;
     }
 
     public UUID getId() {
@@ -88,6 +92,14 @@ public class User {
     }
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public BigDecimal getSolde() {
+        return solde;
+    }
+
+    public void setSolde(BigDecimal solde) {
+        this.solde = solde;
     }
 
 }
