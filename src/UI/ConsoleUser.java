@@ -43,7 +43,19 @@ public class ConsoleUser {
         System.out.println("11 .Logout");
         System.out.println("0 .Exit");
     }
+    public void afficherMenuAdmin() {
+        System.out.println("============ADMIN MENU=======");
 
+        System.out.println("1. View all rooms");
+        System.out.println("2. Create room");
+        System.out.println("3. Update room");
+        System.out.println("4. Delete room");
+        System.out.println("5. View reservation");
+        System.out.println("6. View all users");
+        System.out.println("7. Logout");
+        System.out.println("0. Exit");
+        System.out.println("================================");
+    }
 
     private final Scanner scanner = new Scanner(System.in);
 
